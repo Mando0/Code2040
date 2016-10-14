@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code2040</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script>
+    $(document).ready(function() {
+      $("button").click(function() {
+        $.post("http://challenge.code2040.org/api/register",
+        {
+          token:"d85a633e0bb15bcdaeb858bf461354e4",
+          github: "https://github.com/Mando0/Code2040"
+        },
+        function(data,status) {
+          alert("Data: " + data + "\nStatus: " + status);
+        },
+        "json"); 
+        
+      });
+    });
+</script>
+
+
+</head>
+<body>
+  <button> Send HTTP POST </button>
+</body>
+</html>
