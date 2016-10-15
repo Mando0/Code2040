@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code2040</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script>
+    $(document).ready(function() {
+      $("button").click(function() {
+        $.post("http://challenge.code2040.org/api/prefix",
+        {
+          token:"d85a633e0bb15bcdaeb858bf461354e4"
+        }).done(
+        function(data) {
+          var preLength = data.prefix.length;
+          var newArr = [];
+          for(i = 0; i < data.array.length; i++) {
+            if( data.prefix != data.array[i].substring(0,preLength)) {
+              newArr.push(data.array[i]);
+            }
+          }
+          $.post("http://challenge.code2040.org/api/prefix/validate",
+          {
+            token:"d85a633e0bb15bcdaeb858bf461354e4",
+            array: newArr
+          })
+        })
+      });
+    });
+</script>
+
+
+</head>
+<body>
+  <button> Send HTTP POST </button>
+</body>
+</html>
