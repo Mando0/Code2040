@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code2040</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script>
+    $(document).ready(function() {
+      $("button").click(function() {
+        $.post("http://challenge.code2040.org/api/dating",
+        {
+          token:"d85a633e0bb15bcdaeb858bf461354e4"
+        }).done(
+        function(data) {
+          var d = new Date(data.datestamp);
+          d.setSeconds(d.getSeconds() + data.interval);
+          function ISODateStringNoMillie(d) {
+            function pad(n) {return n<10 ? '0'+n : n}
+            return d.getUTCFullYear()+'-'
+                  + pad(d.getUTCMonth()+1)+'-'
+                  + pad(d.getUTCDate())+'T'
+                  + pad(d.getUTCHours())+':'
+                  + pad(d.getUTCMinutes())+':'
+                  + pad(d.getUTCSeconds())+'Z'
+          }
+          var n = ISODateStringNoMillie(d);
+          $.post("http://challenge.code2040.org/api/dating/validate",
+          {
+            token:"d85a633e0bb15bcdaeb858bf461354e4",
+            datestamp: n 
+          })
+        })
+      });
+    });
+</script>
+
+
+</head>
+<body>
+  <button> Send HTTP POST </button>
+</body>
+</html>
