@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code2040</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script>
+    $(document).ready(function() {
+      $("button").click(function() {
+        var word;
+        $.post("http://challenge.code2040.org/api/reverse",
+        {
+          token:"d85a633e0bb15bcdaeb858bf461354e4"
+        }).done(
+        function(data) {
+          word = data;
+          var backway = word.split("").reverse().join("");
+          alert(backway);
+          $.post("http://challenge.code2040.org/api/reverse/validate",
+          {
+            token:"d85a633e0bb15bcdaeb858bf461354e4",
+            string: backway
+          })
+        })
+      });
+    });
+</script>
+
+
+</head>
+<body>
+  <button> Send HTTP POST </button>
+</body>
+</html>
